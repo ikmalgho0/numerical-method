@@ -30,15 +30,28 @@ int main() {
    cin >> b;
 
    if (persamaan(a) * persamaan(b) > 0) {
-    cout << "ERROR: : Nilai f(a) dan f(b) memiliki tanda yang sama!" << endl;
+    cout << "ERROR: Nilai f(a) dan f(b) memiliki tanda yang sama!" << endl;
     return 1;
+   }
+
+   if (fabs(persamaan(a)) <= toleransi) {
+    cout << "Hasil akar: " << a << endl;
+    return 0;
+   }
+
+   if (fabs(persamaan(b)) <= toleransi) {
+    cout << "Hasil akar: " << b << endl;
+    return 0;
    }
    
    double tengah = c(a, b);
 
    cout << fixed << setprecision(6) << "| " << a << " | " << b << " | " << tengah << " | " << persamaan(a) << " | " << persamaan(b) << " | " << persamaan(tengah) << " |" << endl;
 
-   while (fabs(persamaan(tengah)) > toleransi && b - a > toleransiLebar) {
+   int iterasi = 0;
+   int maksIterasi = 100;
+   while (fabs(persamaan(tengah)) > toleransi && b - a > toleransiLebar && iterasi < maksIterasi) {
+   iterasi++;
     if (persamaan(a) * persamaan(tengah) < 0) {
         b = tengah;
     }
@@ -46,6 +59,14 @@ int main() {
     tengah = c(a, b);
     cout << fixed << setprecision(6) << "| " << a << " | " << b << " | " << tengah << " | " << persamaan(a) << " | " << persamaan(b) << " | " << persamaan(tengah) << " |" << endl;
    }
+
+   if (iterasi >= maksIterasi) {
+    cout << "\nPeringatan: Batas maksimal iterasi tercapai sebelum toleransi terpenuhi!" << endl;
+   } 
+   else {
+    cout << "\nKonvergen tercapai dalam " << iterasi << " iterasi." << endl;
+   }
+
    cout << "\nHasil akar: " << c(a, b) << endl;
    return 0;
 }
