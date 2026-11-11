@@ -19,11 +19,22 @@ double c(double a, double b) {
 }
 
 int main() {
-   double a = 1;
-   double b = 2;
-   double tengah = c(a, b);
+   double a;
+   double b;
    double toleransi = 0.0001;
    double toleransiLebar = 0.0001;
+
+   cout << "Masukkan nilai a: ";
+   cin >> a;
+   cout << "Masukkan nilai b: ";
+   cin >> b;
+
+   if (persamaan(a) * persamaan(b) > 0) {
+    cout << "ERROR: : Nilai f(a) dan f(b) memiliki tanda yang sama!" << endl;
+    return 1;
+   }
+   
+   double tengah = c(a, b);
 
    cout << fixed << setprecision(6) << "| " << a << " | " << b << " | " << tengah << " | " << persamaan(a) << " | " << persamaan(b) << " | " << persamaan(tengah) << " |" << endl;
 
